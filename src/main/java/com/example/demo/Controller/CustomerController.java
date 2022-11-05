@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import com.example.demo.Model.Customer;
-import com.example.demo.Model.Loan;
-import com.example.demo.Model.Transaction;
+import com.example.demo.Model.*;
 import com.example.demo.Service.CustomerService;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +45,8 @@ public class CustomerController {
     }
 
     @GetMapping("/validate")
-    public ResponseEntity<?> validateCustomer(@RequestParam Long username, @RequestParam String password){
-        if(cservice.validate(username, password)){
+    public ResponseEntity<?> validateCustomer(@RequestBody Validate validate){
+        if(cservice.validate(validate.getUsername(), validate.getPassword())){
             return new ResponseEntity(HttpStatus.ACCEPTED);
         }else{
             return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -73,8 +71,9 @@ public class CustomerController {
     }
 
     @GetMapping("/topdf/{id}")
-    public void topdf(@RequestParam Date startDate, @RequestParam Date endDate, @PathVariable Long id, HttpServletResponse response) throws DocumentException, IOException {
-        cservice.dateFilter(id, startDate, endDate, response);
+    public void topdf(@RequestBody DateRange dateRange, @PathVariable Long id, HttpServletResponse response) throws DocumentException, IOException {
+        System.out.println(dateRange);
+        cservice.dateFilter(id, dateRange.getStartDate(), dateRange.getEndDate(), response);
     }
 }
 

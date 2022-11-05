@@ -1,11 +1,7 @@
 package com.example.demo.Model;
 
 public class Loan {
-    private enum bank{
-        Hyderabad,
-        Bangalore,
-        Chennai
-    }
+    private String branch;
 
     private double amount;
 
@@ -15,5 +11,13 @@ public class Loan {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 }

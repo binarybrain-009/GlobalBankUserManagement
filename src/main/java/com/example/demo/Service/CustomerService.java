@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
-import javax.transaction.Transactional;
 
 import com.example.demo.Model.Customer;
 import com.example.demo.Model.Loan;
@@ -17,21 +15,22 @@ import com.example.demo.Repository.CustomerRepository;
 import com.example.demo.Repository.TransactionRepository;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 
 @Service
-@Transactional
 public class CustomerService {
+    private Integer lastId = null;
+
+    private Integer transactionId = null;
     @Autowired
     private CustomerRepository crepo;
 
     @Autowired
     private TransactionRepository trepo;
 
-    public boolean validate(Long customerId, String password) {
-        Optional<Customer> customer = crepo.findById(customerId);
+    public boolean validate(Integer customerId, String password) {
+        Optional<Customer> customer = crepo.findById((long)customerId);
         if(customer.isEmpty()){
             return false;
         }else{
@@ -45,8 +44,17 @@ public class CustomerService {
     }
 
     public Customer registerCustomer(Customer cust) {
+        if(lastId == null){
+            Integer max = 0;
+            for(Customer c: getAllCustomers()){
+                max = Math.max(c.getCustomerId(), max);
+            }
+            lastId = max;
+        }
+        cust.setCustomerId(++lastId);
         return crepo.save(cust); // invoke jpa repository save() method
     }
+
 
     public List<Customer> getAllCustomers() {
         return crepo.findAll();
@@ -64,25 +72,39 @@ public class CustomerService {
     }
 
     public void withdrawOrDeposit(Long id, Transaction transaction){
+        if(transactionId == null){
+            int max = 0;
+            for(Customer c: getAllCustomers()){
+                for(Transaction t: c.getListOfTransaction().values()){
+                    max = Math.max(max, t.getTransactionId());
+                }
+            }
+            transactionId = max;
+        }
         Optional<Customer> customer = getById(id);
         Customer c = customer.get();
+        transactionId++;
+        transaction.setTransactionId(transactionId);
         Double amount = transaction.getAmount();
-        if(transaction.getTransactionType() == "Withdrawal"){
+        if(transaction.getTransactionType().equals("Withdraw")){
             c.setBalance(c.getBalance() - amount);
         }else{
             c.setBalance(c.getBalance() + amount);
         }
+        transaction.setTransactionDate(new Date());
         trepo.save(transaction);
         c.getListOfTransaction().put(transaction.getTransactionId(), transaction);
         crepo.save(c);
     }
 
     public void dateFilter(Long id, Date startDate, Date endDate, HttpServletResponse response) throws DocumentException, IOException {
+        System.out.println(startDate+" "+endDate);
         Optional<Customer> customer = getById(id);
         Customer c = customer.get();
         List<Transaction> listOfTransaction = new ArrayList<>();
         for(Transaction transaction : c.getListOfTransaction().values()){
             Date date = transaction.getTransactionDate();
+            if(date == null){continue;}
             if(date.after(startDate) && date.before(endDate)){
                 listOfTransaction.add(transaction);
             }

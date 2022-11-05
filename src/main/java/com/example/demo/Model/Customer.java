@@ -1,33 +1,30 @@
 package com.example.demo.Model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
+@Document(collection = "Customer")
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerId;
+    private Integer customerId;
 
     private Double balance;
     private String fname;
     private String lname;
     private String password;
-
-    @Column(unique=true)
+    @Indexed(unique=true)
     private String phoneNo;
-
-    @Column(unique=true)
+    @Indexed(unique=true)
     private String email;
+
     private LocalDate dob;
 
     private String occupation;
@@ -35,9 +32,9 @@ public class Customer {
 
 
     List<Loan> listOfLoan = new ArrayList<>();
-    HashMap<Long, Transaction>  listOfTransaction = new HashMap<>();
+    HashMap<Integer, Transaction>  listOfTransaction = new HashMap<>();
 
-    public Long getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
@@ -118,8 +115,11 @@ public class Customer {
         return listOfLoan;
     }
 
-    public HashMap<Long, Transaction> getListOfTransaction() {
+    public HashMap<Integer, Transaction> getListOfTransaction() {
         return listOfTransaction;
     }
 
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
 }

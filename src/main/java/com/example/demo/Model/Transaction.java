@@ -1,20 +1,18 @@
 package com.example.demo.Model;
 
-import com.lowagie.text.pdf.PdfPCell;
-import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
-@Entity
+
+@Document(collection = "Transaction")
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long transactionId;
+    private Integer transactionId;
     private String transactionType;
-    @CreationTimestamp
+
     private Date transactionDate;
 
     private double amount;
@@ -43,7 +41,12 @@ public class Transaction {
         this.transactionType = transactionType;
     }
 
-    public long getTransactionId() {
+    public Integer getTransactionId() {
         return transactionId;
     }
+
+    public void setTransactionId(Integer id){
+        this.transactionId = id;
+    }
+
 }
