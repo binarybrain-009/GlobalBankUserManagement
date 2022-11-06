@@ -21,8 +21,10 @@ const Login = () => {
         axios.post(`${base_url}/validate`, data).then(
             (response) => {
                 console.log("Success");
-                navigate("/App");
+                console.log(data);
                 localStorage.setItem(APP_CONSTANT.isLoggedIn , "true");
+                APP_CONSTANT.customerId = data.username;
+                navigate("/App");
             },
             (error) => {
                 console.log("Error");

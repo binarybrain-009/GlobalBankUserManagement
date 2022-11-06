@@ -1,1 +1,4 @@
-export const APP_CONSTANT  = {isLoggedIn : "isLoggedIn"};
+export const APP_CONSTANT  = {
+    isLoggedIn : "isLoggedIn",
+    customerId : "customerId"
+};
