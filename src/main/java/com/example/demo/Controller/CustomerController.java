@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController // generate & manage REST API in json format
 @RequestMapping(value="/api")
+@CrossOrigin(origins="http://localhost:3000")
 public class CustomerController {
 
     @Autowired
@@ -41,11 +42,13 @@ public class CustomerController {
 
     @GetMapping("/customers")
     public List<Customer> getAllCustomers(){
+        System.out.println("Customers is being called");
         return cservice.getAllCustomers();
     }
 
-    @GetMapping("/validate")
+    @PostMapping("/validate")
     public ResponseEntity<?> validateCustomer(@RequestBody Validate validate){
+        System.out.println("Validate is being called.....");
         if(cservice.validate(validate.getUsername(), validate.getPassword())){
             return new ResponseEntity(HttpStatus.ACCEPTED);
         }else{
