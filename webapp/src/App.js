@@ -9,7 +9,7 @@ import Loan from './Components/Loan';
 import axios from 'axios';
 import base_url from './Components/base_url';
 import { useEffect } from 'react';
-import { APP_CONSTANT } from './Components/Constants';
+import { APP_CONSTANT, Customer } from './Components/Constants';
 
 function App() {
   let customer;
@@ -20,6 +20,7 @@ function App() {
       axios.get(`${base_url}/customer/id/${cid}`).then(
         (reponse) => {
           customer = reponse.data;
+          Customer.customerId = customer.customerId;
           console.log(customer);
         },
         (error) => {
