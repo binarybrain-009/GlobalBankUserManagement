@@ -1,7 +1,12 @@
-* {
+*, body {
     font-family: -apple-system, BlinkMacSystemFont, Open Sans, sans-serif;
     font-size: 13px;
 }
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
 a {
     text-decoration: none;
 }
