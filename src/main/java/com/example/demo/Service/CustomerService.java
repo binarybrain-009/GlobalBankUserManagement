@@ -74,10 +74,8 @@ public class CustomerService {
     public void withdrawOrDeposit(Long id, Transaction transaction){
         if(transactionId == null){
             int max = 0;
-            for(Customer c: getAllCustomers()){
-                for(Transaction t: c.getListOfTransaction().values()){
-                    max = Math.max(max, t.getTransactionId());
-                }
+            for(Transaction t: trepo.findAll()){
+                max = Math.max(max, t.getTransactionId());
             }
             transactionId = max;
         }
@@ -111,12 +109,6 @@ public class CustomerService {
         }
         PdfExporter exporter = new PdfExporter(listOfTransaction);
         exporter.export(response);
-    }
-
-    public void updateBalance(Double balance, Long id) {
-        Optional<Customer> customer = getById(id);
-        Customer c = customer.get();
-        c.setBalance(balance);
     }
 
     public Integer getLastId() {
