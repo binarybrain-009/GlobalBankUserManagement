@@ -19,6 +19,7 @@ function App() {
       console.log(APP_CONSTANT)
       axios.get(`${base_url}/customer/id/${cid}`).then(
         (reponse) => {
+          // This variable has the complete details of customer (everything)
           customer = reponse.data;
           Customer.customerId = customer.customerId;
           console.log(customer);
