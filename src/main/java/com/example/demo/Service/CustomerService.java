@@ -112,5 +112,22 @@ public class CustomerService {
         PdfExporter exporter = new PdfExporter(listOfTransaction);
         exporter.export(response);
     }
+
+    public void updateBalance(Double balance, Long id) {
+        Optional<Customer> customer = getById(id);
+        Customer c = customer.get();
+        c.setBalance(balance);
+    }
+
+    public Integer getLastId() {
+        if(lastId == null){
+            Integer max = 0;
+            for(Customer c: getAllCustomers()){
+                max = Math.max(c.getCustomerId(), max);
+            }
+            lastId = max;
+        }
+        return lastId+1;
+    }
 }
 

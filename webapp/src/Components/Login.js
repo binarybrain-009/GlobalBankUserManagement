@@ -39,7 +39,7 @@ const Login = () => {
             <h2>Login</h2>
             <form onSubmit={onSubmit}>
                 <p>
-                    <label>Customer ID</label><br/>
+                    <label>Customer ID </label><br/>
                     <input type="text" name="username" id="username" required onChange={(e) => {
                         setValidate({...validate, username: e.target.value})
                     }} />

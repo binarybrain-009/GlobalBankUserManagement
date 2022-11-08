@@ -8,6 +8,7 @@ import com.example.demo.Model.*;
 import com.example.demo.Service.CustomerService;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -77,6 +78,17 @@ public class CustomerController {
     public void topdf(@RequestBody DateRange dateRange, @PathVariable Long id, HttpServletResponse response) {
         System.out.println(dateRange);
         cservice.dateFilter(id, dateRange.getStartDate(), dateRange.getEndDate(), response);
+    }
+
+    @PostMapping("/balance/{id}")
+    public ResponseEntity<?> updateBalance(@RequestParam(name = "balance") Double balance, @PathVariable Long id){
+        cservice.updateBalance(balance, id);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/lastid")
+    public ResponseEntity<?> getLastId(){
+        return new ResponseEntity<>(cservice.getLastId(), HttpStatus.ACCEPTED);
     }
 }
 

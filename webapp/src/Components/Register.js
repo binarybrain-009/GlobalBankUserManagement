@@ -1,21 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import base_url from './base_url';
 import { APP_CONSTANT } from './Constants';
 
 const Register = () => {
+    const [cid, setCid] = useState(null);
+    useEffect(
+        () => {
+            axios.get(`${base_url}/lastid`).then(
+                (response) => {
+                    setCid(response.data);
+                    console.log(cid);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+        },[]
+    )
     const[register, setRegister] = useState({
         fname : "",
         lname: "",
         password : "",
         phoneNo : "",
         email : "",
-        address: "",
-        date : "",
+        dob : "",
         occupation : "",
         city : "",
-        balance : "",
+        balance : 0,
     });
 
     const onSubmit = (e) => {
@@ -49,6 +62,9 @@ const Register = () => {
                 <form id="form" action="#" onSubmit={onSubmit}>
                     <fieldset>
                         <h1>Register</h1>
+                        <div id="UserID">
+                            <p> Customer Id : {cid}</p>
+                        </div>
                         <div id="fullName">
                             <p>
                                 <label>First name:</label>
