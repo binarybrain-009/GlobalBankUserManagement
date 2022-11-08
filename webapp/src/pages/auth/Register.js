@@ -1,0 +1,110 @@
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import base_url from '../../Components/base_url';
+
+const Register = () => {
+    const [cid, setCid] = useState("Not Found");
+    useEffect(
+        () => {
+            axios.get(`${base_url}/lastid`).then(
+                (response) => {
+                    setCid(response.data);
+                    console.log(cid);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+    },[cid])
+
+    const[register, setRegister] = useState({
+        fname : "",
+        lname: "",
+        password : "",
+        phoneNo : "",
+        email : "",
+        dob : "",
+        occupation : "",
+        city : "",
+        balance : 0,
+    });
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        input(register);    
+    }
+
+    const navigate = useNavigate();
+    const input = (data) => {
+        axios.post(`${base_url}/customer`, data).then(
+            (response) => {
+                setRegister(response.data);
+                // console.log("Success");
+                // console.log(data);
+                navigate("/login");
+            },
+            (error) => {
+                console.log("Error");
+                console.log(error);
+                navigate("/Register")
+                localStorage.clear();
+            }
+        );
+    }
+
+    return(
+        <>
+            <h3>Register</h3>
+            <form id="form" action="#" onSubmit={onSubmit} className="custom-control double">
+                <div className="custom-section">
+                    <label>Customer ID</label>
+                    <input type="text" name="cid" id="cid" placeholder="Customer ID" required value={cid} disabled />
+                </div>
+                <div className="custom-section">
+                    <label>First name</label>
+                    <input type="text" name="fName" id="fName" placeholder="First Name" required onChange={(e) =>setRegister({...register, fname: e.target.value})} />
+                </div>
+                <div className="custom-section">
+                    <label>Last name</label>
+                    <input type="text" name="lName" id="lName" placeholder="Last Name" required onChange={(e) =>setRegister({...register, lname: e.target.value})} />
+                </div>
+                <div className="custom-section">
+                    <label>Password</label>
+                    <input type="password" name="pass" id="pass" placeholder="Enter Password" required onChange={(e) =>setRegister({...register, password: e.target.value})} />
+                </div>
+                <div className="custom-section">
+                    <label>Phone No.</label>
+                    <input type="tel" name="phone" id="phone" placeholder="Phone number" required onChange={(e) => setRegister({...register, phoneNo: e.target.value})} />
+                </div>
+                <div className="custom-section">
+                    <label>Email ID</label>
+                    <input type="email" name="email" id="email" placeholder="Email Address" required onChange={(e) =>setRegister({...register, email: e.target.value})} />
+                </div>
+                <div className="custom-section">
+                    <label>Address</label>
+                    <input type="address" name="address" id="address" placeholder="Address" required onChange={(e) =>setRegister({...register, address: e.target.value})} />
+                </div>
+                <div className="custom-section">
+                    <label>City</label>
+                    <input type="text" name="city" id="city" placeholder="City" required onChange={(e) => setRegister({...register, city: e.target.value})} />
+                </div>
+                <div className="custom-section">
+                    <label>Occupation</label>
+                    <input type="text" name="occupation" id="occupation" placeholder="Occupation" onChange={(e) =>setRegister({...register, occupation: e.target.value})} />
+                </div>
+                <div className="custom-section">
+                    <label>Date</label>
+                    <input type="text" name="dob" id="dob" placeholder="Enter date: DD-MM-YYYY" onChange={(e) => setRegister({...register, date: e.target.value}) } />
+                </div>
+                <input type="submit" name="submit" id="submit" className='auth-button' />
+            </form>
+            <footer>
+                <p>Already a user? <Link to="/login">Sign In</Link>.</p>
+                <p><Link to="/">Back to Homepage</Link>.</p>
+            </footer>
+        </>
+    );
+}
+
+export default Register;

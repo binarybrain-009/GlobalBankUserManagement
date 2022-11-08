@@ -1,11 +1,11 @@
 import axios from "axios";
 import React from "react";
-import base_url from "./base_url";
-import { APP_CONSTANT } from "./Constants";
+import { useSelector } from "react-redux";
+import base_url from "../../Components/base_url";
 
 const Statement = () => {
     const [daterange, setdaterange] = React.useState({start: null, end: null});
-    const [customerId, setcustomerId] = React.useState(null); // This is temporary, it will be later fetched from localstorage or redux
+    const user = useSelector(state => state.user);
     const getStatement = (e) => {
         e.preventDefault()
         if(daterange.start === null || daterange.end === null){
@@ -13,7 +13,7 @@ const Statement = () => {
             return 0;
         }
         console.log(daterange)
-        axios.post(`${base_url}/topdf/${APP_CONSTANT.customerId}`, daterange).then(
+        axios.post(`${base_url}/topdf/${user.customerId}`, daterange).then(
             (response) => {
                 console.log("Success");
                 console.log(response.data);
@@ -27,20 +27,24 @@ const Statement = () => {
     return(
         <div>
             <h1> This is Statement</h1>
-            <form onSubmit={getStatement}>
-                <div className="my-4">
+            <form onSubmit={getStatement} className="custom-control single" style={{width: "300px"}}>
+                <div className="custom-section">
                     <label>Customer ID</label>
-                    <p>{APP_CONSTANT.customerId}</p>
+                    <p>{user.customerId}</p>
                 </div>
-                <div className="my-4">
+                <div className="custom-section">
                     <label>Transaction Period From</label>
                     <input type="date" onChange={(e)=>setdaterange({...daterange, start: e.target.value})} placeholder="Period From" />
                 </div>
-                <div className="my-4">
+                <div className="custom-section">
                     <label>Transaction Period To</label>
                     <input type="date" onChange={(e)=>setdaterange({...daterange, end: e.target.value})} placeholder="Period To" />
                 </div>
-                        <input type="submit" name="submit" id="submit" value={"Apply"} />
+                <div className="custom-section">
+                    <label>Transaction Period To</label>
+                    <input type="date" onChange={(e)=>setdaterange({...daterange, end: e.target.value})} placeholder="Period To" />
+                </div>
+                <input type="submit" name="submit" id="submit" value={"Apply"} className="main-button" />
             </form>
         </div>
     );
