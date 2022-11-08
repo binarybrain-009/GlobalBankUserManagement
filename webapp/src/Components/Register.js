@@ -20,7 +20,7 @@ const Register = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        input(register);
+        input(register);    
     }
 
     const navigate = useNavigate();
