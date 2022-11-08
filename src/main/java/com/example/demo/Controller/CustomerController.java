@@ -74,7 +74,7 @@ public class CustomerController {
     }
 
     @GetMapping("/topdf/{id}")
-    public void topdf(@RequestBody DateRange dateRange, @PathVariable Long id, HttpServletResponse response) {
+    public void topdf(@RequestBody DateRange dateRange, @PathVariable Long id, HttpServletResponse response) throws DocumentException, IOException {
         System.out.println(dateRange);
         cservice.dateFilter(id, dateRange.getStartDate(), dateRange.getEndDate(), response);
     }
@@ -84,5 +84,4 @@ public class CustomerController {
         return new ResponseEntity<>(cservice.getLastId(), HttpStatus.ACCEPTED);
     }
 }
-
 
