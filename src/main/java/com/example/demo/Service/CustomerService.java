@@ -74,10 +74,8 @@ public class CustomerService {
     public void withdrawOrDeposit(Long id, Transaction transaction){
         if(transactionId == null){
             int max = 0;
-            for(Customer c: getAllCustomers()){
-                for(Transaction t: c.getListOfTransaction().values()){
-                    max = Math.max(max, t.getTransactionId());
-                }
+            for(Transaction t: trepo.findAll()){
+                max = Math.max(max, t.getTransactionId());
             }
             transactionId = max;
         }
@@ -111,6 +109,17 @@ public class CustomerService {
         }
         PdfExporter exporter = new PdfExporter(listOfTransaction);
         exporter.export(response);
+    }
+
+    public Integer getLastId() {
+        if(lastId == null){
+            Integer max = 0;
+            for(Customer c: getAllCustomers()){
+                max = Math.max(c.getCustomerId(), max);
+            }
+            lastId = max;
+        }
+        return lastId+1;
     }
 }
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
-
+//Swagger: http://localhost:8080/swagger-ui/index.html#/
 @RestController // generate & manage REST API in json format
 @RequestMapping(value="/api")
 @CrossOrigin(origins="http://localhost:3000")
@@ -78,6 +78,10 @@ public class CustomerController {
         System.out.println(dateRange);
         cservice.dateFilter(id, dateRange.getStartDate(), dateRange.getEndDate(), response);
     }
-}
 
+    @GetMapping("/lastid")
+    public ResponseEntity<?> getLastId(){
+        return new ResponseEntity<>(cservice.getLastId(), HttpStatus.ACCEPTED);
+    }
+}
 
