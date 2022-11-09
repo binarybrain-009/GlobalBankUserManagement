@@ -1,12 +1,9 @@
 package com.example.demo.Controller;
 
-import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import com.example.demo.Model.*;
 import com.example.demo.Service.CustomerService;
-import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,10 +72,9 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/topdf/{id}")
-    public void topdf(@RequestBody DateRange dateRange, @PathVariable Long id, HttpServletResponse response) throws DocumentException, IOException {
-        System.out.println(dateRange);
-        cservice.dateFilter(id, dateRange.getStartDate(), dateRange.getEndDate(), response);
+    @PostMapping("/topdf/{id}")
+    public ResponseEntity<?> topdf(@RequestBody DateRange dateRange, @PathVariable Long id) {
+        return new ResponseEntity<>(cservice.dateFilter(id, dateRange.getStartDate(), dateRange.getEndDate()), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/lastid")

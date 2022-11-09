@@ -1,15 +1,18 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import base_url from "../../Components/base_url";
 import { showSnack } from "../../comps/Snackbar";
 
 const Statement = () => {
+    const [Transactions, setTransactions] = React.useState([])
     const [daterange, setdaterange] = React.useState({
         "startDate" : "",
         "endDate" : ""
     });
     const user = useSelector(state => state.user);
+    const navigate = useNavigate();
     const getStatement = (e) => {
         e.preventDefault()
         if(daterange.startDate === null || daterange.endDate === null){
@@ -17,17 +20,29 @@ const Statement = () => {
             return 0;
         }
         console.log(daterange)
+        console.log(`${base_url}/topdf/${user.customerId}`);
         axios.post(`${base_url}/topdf/${user.customerId}`, daterange).then(
             (response) => {
                 console.log("Success");
-                console.log(response.data);
+                setTransactions(response.data);
             },
             (error) => {
-                console.log("Error");
+                console.log(error);
             }
         );
-
     }
+    useEffect(
+        () => {
+            console.log(Transactions)
+            if(Transactions.length > 0){
+                navigate("/listOfStatements", {state:{Transactions}});
+            }
+            if(Transactions.length === 0 && !(daterange.startDate === "" || daterange.endDate === "")){
+                showSnack("No Transactions Found for the days", "error")
+            return 0;
+            }
+        }, [Transactions]
+    )
     return(
         <div>
             <h1> This is Statement</h1>
