@@ -5,11 +5,14 @@ import base_url from "../../Components/base_url";
 import { showSnack } from "../../comps/Snackbar";
 
 const Statement = () => {
-    const [daterange, setdaterange] = React.useState({start: null, end: null});
+    const [daterange, setdaterange] = React.useState({
+        "startDate" : "",
+        "endDate" : ""
+    });
     const user = useSelector(state => state.user);
     const getStatement = (e) => {
         e.preventDefault()
-        if(daterange.start === null || daterange.end === null){
+        if(daterange.startDate === null || daterange.endDate === null){
             showSnack("Please enter valid dates", "error")
             return 0;
         }
@@ -35,15 +38,11 @@ const Statement = () => {
                 </div>
                 <div className="custom-section">
                     <label>Transaction Period From</label>
-                    <input type="date" onChange={(e)=>setdaterange({...daterange, start: e.target.value})} placeholder="Period From" />
+                    <input type="date" onChange={(e)=>setdaterange({...daterange, startDate: e.target.value})} placeholder="Period From" />
                 </div>
                 <div className="custom-section">
                     <label>Transaction Period To</label>
-                    <input type="date" onChange={(e)=>setdaterange({...daterange, end: e.target.value})} placeholder="Period To" />
-                </div>
-                <div className="custom-section">
-                    <label>Transaction Period To</label>
-                    <input type="date" onChange={(e)=>setdaterange({...daterange, end: e.target.value})} placeholder="Period To" />
+                    <input type="date" onChange={(e)=>setdaterange({...daterange, endDate: e.target.value})} placeholder="Period To" />
                 </div>
                 <input type="submit" name="submit" id="submit" value={"Apply"} className="main-button" />
             </form>

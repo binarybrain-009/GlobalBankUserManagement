@@ -63,12 +63,14 @@ public class CustomerController {
 
     @PostMapping("/loan/{id}")
     public ResponseEntity<?> applyForLoan(@RequestBody Loan loan, @PathVariable Long id){
+        System.out.println("Loan is called");
         cservice.applyForLoan(id, loan);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/transaction/{id}")
     public ResponseEntity<?> transaction(@RequestBody Transaction transaction, @PathVariable Long id){
+        System.out.println("Transaction is being called");
         cservice.withdrawOrDeposit(id, transaction);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

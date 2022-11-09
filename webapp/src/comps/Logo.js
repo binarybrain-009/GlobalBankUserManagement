@@ -6,7 +6,7 @@ const Logo = () => {
         <>
             <div className="logo-main">
                 <Globe />
-                <h3>Global Bank</h3>
+                <h3 >Global Bank</h3>
             </div>
         </>
     )
