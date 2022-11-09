@@ -15,8 +15,13 @@ const Statement = () => {
     const navigate = useNavigate();
     const getStatement = (e) => {
         e.preventDefault()
+        console.log(new Date());
         if(daterange.startDate === null || daterange.endDate === null){
             showSnack("Please enter valid dates", "error")
+            return 0;
+        }
+        if(new Date(daterange.startDate) > new Date()){
+            showSnack("Please enter valid dates", "error");
             return 0;
         }
         console.log(daterange)
@@ -39,7 +44,6 @@ const Statement = () => {
             }
             if(Transactions.length === 0 && !(daterange.startDate === "" || daterange.endDate === "")){
                 showSnack("No Transactions Found for the days", "error")
-            return 0;
             }
         }, [Transactions]
     )

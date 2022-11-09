@@ -6,7 +6,7 @@ const TransactionCard = ({tran}) => {
         <Card>
             <CardBody>
                 <Row>
-                    <Col md={3}>Id : {tran.transactionId}</Col>
+                    <Col md={1}>Id : {tran.transactionId}</Col>
                     <Col md={3}>Date: {tran.transactionDate}</Col>
                     <Col md={3}>Type: {tran.transactionType}</Col>
                     <Col md={3}>Amount: {tran.amount}</Col>

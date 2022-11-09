@@ -98,7 +98,7 @@ class CustomerServiceTest {
     @Test
     void dateFilter() throws DocumentException, IOException {
         given(customerRepository.findById((long)customer.getCustomerId())).willReturn(Optional.ofNullable(customer));
-        customerService.dateFilter((long) customer.getCustomerId(), new Date(1/11/2022), new Date(2/11/2022), httpServletResponse);
+        customerService.dateFilter((long) customer.getCustomerId(), new Date(1/11/2022), new Date(2/11/2022));
     }
 
     @Test
