@@ -3,14 +3,14 @@ package com.example.demo.Controller;
 import java.util.List;
 
 import com.example.demo.Model.*;
+import com.example.demo.ResponseBody.DateRange;
+import com.example.demo.ResponseBody.Validate;
 import com.example.demo.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
 
 //Swagger: http://localhost:8080/swagger-ui/index.html#/
 @RestController // generate & manage REST API in json format

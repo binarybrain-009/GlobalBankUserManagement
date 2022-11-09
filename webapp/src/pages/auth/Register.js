@@ -25,7 +25,7 @@ const Register = () => {
         password : "",
         phoneNo : "",
         email : "",
-        // dob : "",
+        dob : "",
         // address: "",
         occupation : "",
         city : "",
@@ -107,10 +107,10 @@ const Register = () => {
                     <label>Occupation</label>
                     <input type="text" name="occupation" id="occupation" placeholder="Occupation" onChange={(e) =>setRegister({...register, occupation: e.target.value})} />
                 </div>
-                {/* <div className="custom-section">
+                <div className="custom-section">
                     <label>Date</label>
-                    <input type="text" name="dob" id="dob" placeholder="Enter date: DD-MM-YYYY" onChange={(e) => setRegister({...register, dob: e.target.value}) } />
-                </div> */}
+                    <input type="date" name="dob" id="dob" placeholder="Enter date: DD-MM-YYYY" onChange={(e) => setRegister({...register, dob: e.target.value}) } />
+                </div>
                 <input type="submit" name="submit" id="submit" className='auth-button' />
             </form>
             <footer>

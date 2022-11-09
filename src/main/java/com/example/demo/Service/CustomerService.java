@@ -1,19 +1,15 @@
 package com.example.demo.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import javax.servlet.http.HttpServletResponse;
 
 import com.example.demo.Model.Customer;
 import com.example.demo.Model.Loan;
 import com.example.demo.Model.Transaction;
 import com.example.demo.Repository.CustomerRepository;
 import com.example.demo.Repository.TransactionRepository;
-import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.demo.Model;
+package com.example.demo.ResponseBody;
 
 public class Validate {
     Integer username;
