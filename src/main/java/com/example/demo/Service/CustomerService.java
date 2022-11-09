@@ -52,6 +52,7 @@ public class CustomerService {
             lastId = max;
         }
         cust.setCustomerId(++lastId);
+        cust.setBalance((double) 0);
         return crepo.save(cust); // invoke jpa repository save() method
     }
 
