@@ -2,11 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-
+import { showSnack } from './comps/Snackbar';
 import axios from "axios";
 
 // CSS
-import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./assets/declare.css"
 
@@ -52,27 +51,6 @@ const myStore = createStore(
 const persistor = persistStore(myStore);
 
 
-const showSnack = (message, type='default') => {
-  const ran = Math.floor(Math.random() * 10001);
-  const snackid = `Snack${ran.toString()}`
-  const div = document.createElement("div")
-  div.id = snackid;
-  div.className = `snackbar ${type}`
-  const p = document.createElement("p")
-  p.className = 'snack-message'
-  p.innerHTML = message
-  div.append(p)
-  document.getElementById('snack').append(div)
-  // console.log(message, type, snackid)
-  setTimeout(() => {
-    try{
-      document.getElementById(snackid).remove()
-    }
-    catch {
-      console.log('')
-    }
-  }, 6500);
-}
 
 axios.interceptors.response.use(
   function (response) {
@@ -84,7 +62,12 @@ axios.interceptors.response.use(
   function (er) {
     if (axios.isAxiosError(er)) {
       if (er.response) {
-        showSnack("Something went wrong", "error")
+        console.log(er.request.responseURL)
+        let message = "Something went wrong"
+        if(er.request.responseURL === "http://localhost:8080/api/validate" && er.response.status === 404){
+          message = "Enter Password is Incorrect"
+        }
+        showSnack(message, "error")
       }
     }
 

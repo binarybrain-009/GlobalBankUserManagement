@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
 import base_url from "../../Components/base_url";
+import { showSnack } from "../../comps/Snackbar";
 
 const Statement = () => {
     const [daterange, setdaterange] = React.useState({start: null, end: null});
@@ -9,7 +10,7 @@ const Statement = () => {
     const getStatement = (e) => {
         e.preventDefault()
         if(daterange.start === null || daterange.end === null){
-            console.log("error on dates") // snackbar 
+            showSnack("Please enter valid dates", "error")
             return 0;
         }
         console.log(daterange)

@@ -11,7 +11,7 @@ const Main = (props) => {
     const user = useSelector(state => state.user);
     const navigate = useNavigate();
     useEffect(()=> {
-        if(user.customerId === undefined) {
+        if(user.customerId === undefined || user.customerId === "") {
             navigate("/login")
         }
         else{

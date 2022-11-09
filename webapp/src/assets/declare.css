@@ -149,8 +149,8 @@ input {
     box-shadow: 0 0 2px 0 rgb(145 158 171 / 24%), 0 16px 32px -4px rgb(145 158 171 / 24%);
     border-radius: 8px;
     margin-bottom: 10px;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 3000ms;
-    animation: fadein 0.5s, fadeout 0.5s 3000ms;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 6000ms;
+    animation: fadein 0.5s, fadeout 0.5s 6000ms;
     transition: all ease 700ms;
 }
 @-webkit-keyframes fadein {

@@ -4,6 +4,7 @@ import axios from 'axios';
 import base_url from '../../Components/base_url';
 import { useDispatch } from 'react-redux';
 import login from "../../assets/login.svg"
+import { showSnack } from '../../comps/Snackbar';
 
 const Login = () => {
     const[validate, setValidate] = useState({
@@ -13,15 +14,18 @@ const Login = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(validate);
-        check(validate);
-    }
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const check = (data) => {
-        axios.post(`${base_url}/validate`, data).then(
+        if(validate.username==="" || validate.password === ""){
+            showSnack("Please Enter all the credentials properly", "warning");
+            return 0;
+        }
+        if(isNaN(validate.username)){ 
+            showSnack("Please Enter a valid Customer ID", "warning");
+            return 0;
+        }
+        axios.post(`${base_url}/validate`, validate).then(
             (response) => {
-                dispatch({type: "LOGIN", payload: {customerId: data.username, name: "Vivek", email: ""}}) // Should be updated later accordingly
+                console.log(response.data)
+                dispatch({type: "LOGIN", payload: {customerId: validate.username, name: "Vivek", email: ""}}) // Should be updated later accordingly
                 navigate("/");
             },
             (error) => {
@@ -30,6 +34,9 @@ const Login = () => {
             }
         );
     }
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
     return (
         <>
             <h3>Login</h3>
