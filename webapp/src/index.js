@@ -31,6 +31,7 @@ import Statement from './pages/main/Statement';
 import Home from './Components/Home';
 import Loan from './Components/Loan';
 import Transaction from './Components/Transaction';
+import AllTransaction from './Components/AllTransaction';
 
 // PERSIST CONFIG
 const persistConfig = {
@@ -91,6 +92,7 @@ root.render(
           <Route path='/Loan' element={<Loan />}/>
           <Route path='/Transaction' element={<Transaction />}/>
           <Route path='/Statement' element={<Statement />}/>
+          <Route path='/listOfStatements' element={<AllTransaction />} />
         </Route>
       </Routes>
       <div className='snack-container' id='snack'></div>

@@ -23,6 +23,7 @@ const Loan = () => {
         }
         axios.post(`${base_url}/loan/${user.customerId}`, loan).then(
             (response) => {
+                console.log(response);
                 console.log("Success");
                 showSnack("Successfully applied for loan", "success")
                 console.log(response.data);

@@ -95,7 +95,7 @@ public class CustomerService {
         crepo.save(c);
     }
 
-    public void dateFilter(Long id, Date startDate, Date endDate, HttpServletResponse response) throws DocumentException, IOException {
+    public List<Transaction> dateFilter(Long id, Date startDate, Date endDate){
         System.out.println(startDate+" "+endDate);
         Optional<Customer> customer = getById(id);
         Customer c = customer.get();
@@ -107,8 +107,7 @@ public class CustomerService {
                 listOfTransaction.add(transaction);
             }
         }
-        PdfExporter exporter = new PdfExporter(listOfTransaction);
-        exporter.export(response);
+        return listOfTransaction;
     }
 
     public Integer getLastId() {
