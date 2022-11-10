@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
-import { showSnack } from "../comps/Snackbar";
-import base_url from "./base_url";
+import base_url from "../../Components/base_url";
+import { showSnack } from "../../comps/Snackbar";
 
 const Loan = () => {
     const [loan, setLoan] = React.useState({
@@ -36,7 +36,7 @@ const Loan = () => {
     }
     return(
         <div>
-            <h1> This is Loan</h1>
+            <h1> Apply for Loan</h1>
             <form onSubmit={getLoan} className="custom-control single" style={{width: "300px"}}>
                 <div className="custom-section">
                     <label>Customer ID</label>

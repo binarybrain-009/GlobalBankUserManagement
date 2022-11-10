@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import MainHeader from "../comps/MainHeader.js";
 import Menu from "../comps/Menu.js";
 import { Col, Row } from "reactstrap";
+import { showSnack } from "../comps/Snackbar.js";
 
 const Main = (props) => {
     
@@ -12,6 +13,7 @@ const Main = (props) => {
     const navigate = useNavigate();
     useEffect(()=> {
         if(user.customerId === undefined || user.customerId === "") {
+            showSnack("You need to login before going in", "error")
             navigate("/login")
         }
         else{
@@ -23,15 +25,17 @@ const Main = (props) => {
     return (
         <>
         <div className="main-content" ref={mainContent}>
-            <MainHeader />
-            <Row className="mx-0">
-                <Col xs={2} id="sidebar-wrapper" className="p-0">
+            {/* <Row className="mx-0">
+                <Col xs={2} id="sidebar-wrapper" className="p-0"> */}
                     <Menu />
-                </Col>
-                <Col xs={10} id="page-content-wrapper">
+                {/* </Col>
+                <Col xs={10} id="page-content-wrapper"> */}
+                <div className="layout">
+            <MainHeader />
                     <Outlet />
-                </Col>
-            </Row>
+                </div>
+                {/* </Col>
+            </Row> */}
             
         </div>
         </>

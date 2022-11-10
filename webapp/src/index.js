@@ -23,15 +23,18 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 // LAYOUTS
 import Auth from './layouts/Auth';
 import Main from './layouts/Main';
+import Index from './layouts/Index';
 
 // PAGES
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Statement from './pages/main/Statement';
-import Home from './Components/Home';
-import Loan from './Components/Loan';
-import Transaction from './Components/Transaction';
+import Dashboard from './pages/main/Dashboard';
+import Loan from './pages/main/Loan';
+import Transaction from './pages/main/Transaction';
+
 import AllTransaction from './Components/AllTransaction';
+import Landing from './pages/main/Landing';
 
 // PERSIST CONFIG
 const persistConfig = {
@@ -87,8 +90,11 @@ root.render(
           <Route path={"register"} element={<Register />} key={1} />
           <Route path={"login"} element={<Login />} key={2} />
         </Route>
+        <Route element={<Index />}>
+          <Route path="/" element={<Landing />} />
+        </Route>
         <Route element={<Main />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path='/Loan' element={<Loan />}/>
           <Route path='/Transaction' element={<Transaction />}/>
           <Route path='/Statement' element={<Statement />}/>

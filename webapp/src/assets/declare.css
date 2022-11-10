@@ -21,7 +21,10 @@ a {
     margin: 0;
     margin-left: 10px;
 }
-input {
+.logo-main.color-white {
+    color: white;
+}
+input, select {
     outline: 0;
     border: 1px solid #ced7ed;
     padding: 8px 8px;
@@ -114,6 +117,87 @@ input {
     background-color: red;
     color: white;
 }
+.navbar {
+    background-color: #d7e3e5;
+}
+.landing-navbar {
+    background-color: #333399;
+}
+.layout {
+    flex-grow: 1;
+}
+.main-content {
+    min-height: 100vh;
+    display: flex;
+}
+.sidebar-main {
+    background-color: #333399;
+    width: 300px;
+}
+.sidebar-main::after {
+    position: absolute;
+    /* left: 0;
+    top: 0; */
+    top: 0;
+    left: 250px;
+    z-index: 10;
+    content: '';
+    width: 50px;
+    height: 100%;
+    border-bottom-left-radius: 100px;
+    border-top-left-radius: 100px;
+    background-color: #d7e3e5;
+}
+.sidebar-brand {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: center;
+    margin-left: -50px;
+}
+.sidebar-main .nav-item, .sidebar-main .nav-link {
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #d7deffda;
+}
+.sidebar-brand {
+    margin-bottom: 80px;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    padding-left: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.main-content {
+    background-color: #d7e3e5;
+}
+.main-card {
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 8px;
+}
+.main-card .card-title {
+    padding: 8px 12px;
+    border-bottom: 1px solid lightgrey;
+}
+.main-card .card-body {
+    padding: 8px 12px;
+}
+
+.carousel.slide img {
+    max-height: 450px;  
+    object-fit: cover;
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -137,7 +221,7 @@ input {
 .snack-container {
     position: fixed !important;
     left: 20px;
-    bottom: 20px;
+    top: 20px;
     z-index: 6500 ;
     /* transform: translate(-50%,0); */
     justify-content: flex-start;
