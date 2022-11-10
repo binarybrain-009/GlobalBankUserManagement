@@ -1,0 +1,8 @@
+{
+    "short_name": "Saraf Circle",
+    "name": "Saraf Circle",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "theme_color": "#007eec",
+    "background_color": "#ffffff"
+}

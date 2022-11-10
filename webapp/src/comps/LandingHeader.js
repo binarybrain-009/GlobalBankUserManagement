@@ -3,39 +3,26 @@ import { User } from "react-feather";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Navbar, NavbarBrand, NavbarText, DropdownMenu, DropdownToggle, UncontrolledDropdown, DropdownItem } from "reactstrap";
-import { useSelector } from "react-redux";
-import axios from 'axios';
-import base_url from '../Components/base_url';
+import Logo from "./Logo";
+
 const MainHeader = () => {
-    const[fname, setFname] = React.useState("") ;
-    const user = useSelector(state => state.user);
-    React.useEffect(
-        () => {
-            axios.get(`${base_url}/customer/id/${user.customerId}`).then(
-                (response) => {
-                    setFname(response.data.fname);
-                },
-                (error) => {
-                    console.log(error);
-                }
-            )
-    },[fname])
     const dispatch = useDispatch();
     const navigate = useNavigate();
     return (
-        <Navbar className="navbar">
+        <Navbar className="landing-navbar">
             <NavbarBrand>
-                    {/* <Logo /> */}
+                    <Logo color="white" />
 
             </NavbarBrand>
             <NavbarText>
                 <UncontrolledDropdown >
                     <DropdownToggle nav>
-                        <User size={21} />
+                        <User size={21} color="white" />
                     </DropdownToggle>
                     <DropdownMenu end>
-                        <DropdownItem >Hi {fname}!</DropdownItem>
-                        <DropdownItem  onClick={()=>navigate('/')}>Landing</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('/login')}>Login</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('/register')}>Register</DropdownItem>
+                        <DropdownItem onClick={()=>navigate('/dashboard')}>Dashboard</DropdownItem>
                         <DropdownItem divider />
                         <DropdownItem onClick={()=>{dispatch({type: "LOGOUT"});navigate("/login")}}>Logout</DropdownItem>
                     </DropdownMenu>
