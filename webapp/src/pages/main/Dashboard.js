@@ -1,11 +1,25 @@
 import React  from "react";
 import { Link } from 'react-router-dom'
-
+import axios from 'axios';
+import base_url from '../../Components/base_url';
+import { useSelector } from "react-redux";
 const Home = () => {
-
+    const[fname, setFname] = React.useState("") ;
+    const user = useSelector(state => state.user);
+    React.useEffect(
+        () => {
+            axios.get(`${base_url}/customer/id/${user.customerId}`).then(
+                (response) => {
+                    setFname(response.data.fname);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+    },[fname])
     return (
         <>
-        <h1 className="mb-5">Welcome!</h1>
+        <h1 className="mb-5">Welcome {fname}!</h1>
         <div style={{display: "grid", gridTemplateColumns: "1fr 1fr",gridGap: "20px", padding: "10px"}}>
             <div className="main-card">
                 <div className="card-title" ><h4>Apply for Loan</h4></div>

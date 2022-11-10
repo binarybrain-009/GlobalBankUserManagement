@@ -3,9 +3,23 @@ import { User } from "react-feather";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Navbar, NavbarBrand, NavbarText, DropdownMenu, DropdownToggle, UncontrolledDropdown, DropdownItem } from "reactstrap";
-import Logo from "./Logo";
-
+import { useSelector } from "react-redux";
+import axios from 'axios';
+import base_url from '../Components/base_url';
 const MainHeader = () => {
+    const[fname, setFname] = React.useState("") ;
+    const user = useSelector(state => state.user);
+    React.useEffect(
+        () => {
+            axios.get(`${base_url}/customer/id/${user.customerId}`).then(
+                (response) => {
+                    setFname(response.data.fname);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+    },[fname])
     const dispatch = useDispatch();
     const navigate = useNavigate();
     return (
@@ -20,7 +34,7 @@ const MainHeader = () => {
                         <User size={21} />
                     </DropdownToggle>
                     <DropdownMenu end>
-                        <DropdownItem >Hi Vivek!</DropdownItem>
+                        <DropdownItem >Hi {fname}!</DropdownItem>
                         <DropdownItem  onClick={()=>navigate('/')}>Landing</DropdownItem>
                         <DropdownItem divider />
                         <DropdownItem onClick={()=>{dispatch({type: "LOGOUT"});navigate("/login")}}>Logout</DropdownItem>
