@@ -7,6 +7,8 @@ Global Bank allows bank customers to log in and performs simple bank transaction
 3.	As a user he/she can be able to perform withdraw or deposit amount
 4.	As a user can be able to view all his / her selected transactions ie., withdraw or deposit for a specific period.
 5.	Display all transactions for a specific period 
+
+
 Wireframes:
 a.	A standard login screen to validate user id (customer_number) and password
 b.	Screen for user operations menu 
