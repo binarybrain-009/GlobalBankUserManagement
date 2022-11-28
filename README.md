@@ -18,7 +18,7 @@ f.	Transaction management
 g.	View Statement
 
 Toolchain
-Databases: MySQL
+Databases: MongoDB
 Presentation or View Layer: React
 Backend processing: Spring and Springboot
 Database Connectivity: Spring data JPA
@@ -122,18 +122,21 @@ User Story Details	1.	Should be able to read transactional ie user account_numbe
 3.	Should return all transaction data 
 Acceptance Criteria	1.	If from is ahead of to date it should throw exception and must be handled.
 2.	Transaction type must be either withdraw or deposit
-Database Layer 
+
+There should be a Database Layer 
+
 User story 	User Story Details
-Us_01	1.	DB Schema creation and setup in mysql database
+Us_01	1.	DB Schema creation and setup in MongoDB database
 2.	Spring boot project setup creation.
 3.	Develop the post method api to read data from view page.
 4.	Use appropriate DTO objects for view and data integration
 5.	Use spring data jpa for connecting to databases.
+
 Us_02	1.	Set up the appropriate methods to perform functions like user validation, user registration, transaction management, transaction details.
 
 Presentation:
-I.	No custom CSS, UX framework like bootstrap must be used 
-II.	 An Appropriate GoF design pattern should be implemented to compose and process the data received from backend APIs 
-III.	SOLID principles should be implemented to develop reusable and modular components 
-IV.	UI app should have appropriate client-side validations 
-V.	UI app should have the latest versions of available imported packages and libraries
+I.	No custom CSS, UX framework like bootstrap used.
+II.	 An Appropriate GoF design pattern implemented to compose and process the data received from backend APIs 
+III.	SOLID principles be implemented to develop reusable and modular components 
+IV.	UI app having appropriate client-side validations
+V.	UI app has the latest versions of available imported packages and libraries
